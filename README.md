@@ -7,9 +7,12 @@ A Python command-line program that takes a stock symbol and prints the current d
 
 ## Quick start
 
+Run all commands below from the `python-finance-info/` folder.
+
 macOS / Linux:
 
 ```bash
+cd python-finance-info
 ./run.sh              # interactive: type symbols one after another, q to quit
 ./run.sh ADBE MSFT    # look up these symbols once and exit
 ./run.sh --test       # run the unit tests (no internet needed)
@@ -102,10 +105,7 @@ python-finance-info/
 │   └── cli.py                 interactive loop and command-line arguments
 ├── tests/test_finance_info.py 21 unit tests using fakes (no internet needed)
 ├── run.sh / run.bat           run scripts
-├── requirements.txt
-└── docs/
-    ├── agent_design.tex       write-up source (LaTeX)
-    └── agent_design.pdf       write-up (PDF)
+└── requirements.txt
 ```
 
 The design keeps each concern in its own module. The user interface only receives a `Quote` or one of the error types in `errors.py`, so `yfinance`, curl and HTTP details stay inside the provider. Swapping Yahoo for another data source means writing one new class with a `get_quote(symbol)` method.
@@ -122,8 +122,7 @@ The tests cover the output format against the assignment example, sign handling 
 
 ## Write-up: designing this as an AI agent
 
-*Also available as a PDF:* `[docs/agent_design.pdf](docs/agent_design.pdf)` *(LaTeX source:* `[docs/agent_design.tex](docs/agent_design.tex)`*).
-Chapter references are to Pressman & Maxim, Software Engineering: A Practitioner's Approach, 9th edition, Chapters 1 to 15.*
+*Chapter references are to Pressman & Maxim, Software Engineering: A Practitioner's Approach, 9th edition, Chapters 1 to 15.*
 
 **The agent.** A user asks in plain language, for example "How did Adobe and Microsoft do today?" A language model works out what is being asked, resolves company names to ticker symbols, calls a `get_quote` tool for each one, and writes the answer. The `get_quote` tool is the deterministic provider layer from this program. The model chooses which data to fetch, and every price in the answer comes from that tool.
 
