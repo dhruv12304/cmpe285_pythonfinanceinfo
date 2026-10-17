@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+*.egg-info/
+build/
+dist/
+
+# Design docs are kept local only
+docs/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
